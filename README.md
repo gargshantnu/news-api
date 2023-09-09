@@ -9,6 +9,7 @@ Below items are done in this project:
 - Added cache on both trending article list api and search api.
 - If multiple search parameters are selected at once, i am appending all of the search values with `OR` and putting all the fields inside `in` operator of news api. This will give undesired results, like if you want to search a particular `title` and `description` , it will mix it up, and search `description` in `title` as well - this is a limitation from news api provider - we can tackle it by looking for a different provider which have more freedom when doing searches or we will have to build our own database as well - where we can pull data from news provider and give more freedom in terms of search and other features.
 - For trending news api, i have added cache on basis of `limit`, lets say user is asking for 5 news and in cache i have >= 5 news, then i am returning cached news, else i am making an api call and storing that data in cache and returning that new data to user. We can optimize this cache strategy as well. At the moment cache period is `5 min`.
+- Added VS Code debugger config.
 
 
 
