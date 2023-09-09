@@ -1,3 +1,6 @@
 {
-    "gNewsApiKey": "7c9e4808b016da7dbd082ad564021912"
+    "gNews": {
+        "apiKey": "7c9e4808b016da7dbd082ad564021912",
+        "baseUrl": "https://gnews.io/api/v4"
+    }
 }
