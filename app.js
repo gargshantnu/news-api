@@ -12,7 +12,20 @@ app.get('/', (req, res) => {
 
 app.use("/", router);
 
+const hazelCache = require("./src/utils/hazelCache");
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+
+
+Promise.all([hazelCache.initializeClient()])
+    .then(startApp)
+    .catch(error => {
+        console.log("error while starting express app ", error);
+        throw new Error(error);
+    });
+
+
+function startApp() {
+    app.listen(port, () => {
+        console.log(`Example app listening on port ${port}`);
+    });
+}
