@@ -6,8 +6,14 @@ const getTrendingNewsArticles = async (req, resp, next) => {
         let { limit } = req.query;
         let articleList = await newsService.getTrendingNewsArticles(limit);
         return resp.json(articleList);
-    } catch (e) {
-        console.log(e);
+    } catch (err) {
+        console.log("executing error handler for error: ", err);
+        return resp
+            .status(500)
+            .json({
+                message:
+                    "Result could not be computed, please contact developers to check logs.",
+            });
     }
 };
 
@@ -21,8 +27,14 @@ const searchNewsArticles = async (req, resp, next) => {
             content
         );
         return resp.json(articleList);
-    } catch (e) {
-        console.log(e);
+    } catch (err) {
+        console.log("executing error handler for error: ", err);
+        return resp
+            .status(500)
+            .json({
+                message:
+                    "Result could not be computed, please contact developers to check logs.",
+            });
     }
 };
 
