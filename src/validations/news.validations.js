@@ -3,7 +3,7 @@ const joi = require("joi");
 
 const getTrendingNewsArticles = {
     query: joi.object().keys({
-        // country: joi.string(),
+        limit: joi.number(),
     }),
 };
 

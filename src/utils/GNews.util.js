@@ -38,10 +38,10 @@ const searchNews = (title, description, content) => {
     return axios.get(`${config.gNews.baseUrl}/search`, { params });
 };
 
-const getTrendingNews = () => {
+const getTrendingNews = (limit=10) => {
     const params = {
         apikey: config.gNews.apiKey,
-        max: "10",
+        max: limit,
         category: "general"
     };
 

@@ -5,7 +5,8 @@ const gNewsUtil = require("../utils/GNews.util");
 const getTrendingNewsArticles = async (req, resp, next) => {
     try {
         // top n articles
-        let r = await gNewsUtil.getTrendingNews();
+        let { limit } = req.query;
+        let r = await gNewsUtil.getTrendingNews(limit);
         console.log(r.data);
         return resp.json(r.data);
     } catch (e) {
@@ -16,7 +17,6 @@ const getTrendingNewsArticles = async (req, resp, next) => {
 const searchNewsArticles = async (req, resp, next) => {
     try {
         // by title or description or contents
-        console.log(req.query);
         let { title, description, content } = req.query;
         let r = await gNewsUtil.searchNews(title, description, content);
         console.log(r.data);

@@ -4,7 +4,12 @@ const newsReqValidations = require("../validations/news.validations");
 const validator = require('express-joi-validation').createValidator({})
 
 
-newsRouter.get("/trending", newsController.getTrendingNewsArticles);
+newsRouter.get(
+    "/trending",
+    validator.query(newsReqValidations.getTrendingNewsArticles.query),
+    newsController.getTrendingNewsArticles
+);
+
 newsRouter.get(
     "/search",
     validator.query(newsReqValidations.searchNewsArticles.query),
