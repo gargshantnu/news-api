@@ -1,5 +1,5 @@
 const config = require("../config/config");
-const gNewsUtil = require("../utils/gNews.util");
+const gNewsUtil = require("../utils/GNews.util");
 
 
 const getTrendingNewsArticles = async (req, resp, next) => {
