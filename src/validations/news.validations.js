@@ -8,11 +8,11 @@ const getTrendingNewsArticles = {
 };
 
 const searchNewsArticles = {
-    params: joi.object().keys({
+    query: joi.object().keys({
         title: joi.string(),
         description: joi.string(),
         content: joi.string(),
-    }),
+    }).min(1),
 };
 
 
