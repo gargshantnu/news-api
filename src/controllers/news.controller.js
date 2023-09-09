@@ -8,18 +8,17 @@ const getTrendingNewsArticles = async (req, resp, next) => {
         let { limit } = req.query;
         let data = await hazelCacheClient.getDataFromMap(
             "TRENDING_NEWS_LIST",
-            "a"
+            "TRENDING_NEWS_LIST_KEY"
         );
         let articleList;
-        
+
         if (!data || JSON.parse(data).length < limit) {
             // if there is no data in cache or cached data size is low - make new api call and cache that data.
             console.log("calling api", limit);
             articleList = await gNewsUtil.getTrendingNews(limit);
-            articleList = articleList.data.articles;
             hazelCacheClient.setDataIntoMap(
                 "TRENDING_NEWS_LIST",
-                "a",
+                "TRENDING_NEWS_LIST_KEY",
                 JSON.stringify(articleList)
             );
         } else {
@@ -37,8 +36,28 @@ const searchNewsArticles = async (req, resp, next) => {
     try {
         // by title or description or contents
         let { title, description, content } = req.query;
-        let articleList = await gNewsUtil.searchNews(title, description, content);
-        return resp.json(articleList.data.articles);
+        let search = gNewsUtil.prepareSearchQuery(title, description, content);
+        let hash = search.in + search.q;
+        let data = await hazelCacheClient.getDataFromMap(
+            "SEARCH_NEWS_LIST",
+            hash
+        );
+        if (data) {
+            return resp.json(data);
+        }
+
+        let articleList = await gNewsUtil.searchNews(
+            title,
+            description,
+            content
+        );
+
+        hazelCacheClient.setDataIntoMap(
+            "SEARCH_NEWS_LIST",
+            hash,
+            JSON.stringify(articleList)
+        );
+        return resp.json(articleList);
     } catch (e) {
         console.log(e);
     }
