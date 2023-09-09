@@ -2,5 +2,11 @@
     "gNews": {
         "apiKey": "7c9e4808b016da7dbd082ad564021912",
         "baseUrl": "https://gnews.io/api/v4"
+    }, 
+    "cache": {
+        "clusterName": "dev",
+        "clusterMembers": [
+            "127.0.0.1:5701"
+        ]
     }
 }

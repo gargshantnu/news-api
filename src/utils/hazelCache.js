@@ -2,6 +2,8 @@ const {
     Client
 } = require('hazelcast-client');
 
+const config = require("../config/config");
+
 const MAX_RECONNECT_ATTEMPTS = 60;
 const TEN_SECOND = 10000;
 let currentReconnectAttemptCount = 0;
@@ -13,11 +15,9 @@ exports.initializeClient = async () => {
     // dont throw exception even if not connected to hazel cache.
     try {
         client = await Client.newHazelcastClient({
-            clusterName: 'dev',
+            clusterName: config.cache.clusterName,
             network: {
-                clusterMembers: [
-                    '127.0.0.1:5701',
-                ]
+                clusterMembers: config.cache.clusterMembers
             },
             // security: {
             //     usernamePassword: {
@@ -36,7 +36,7 @@ exports.initializeClient = async () => {
             ]
         });
     } catch (error) {
-        console.error("err in starting hazelCache client: ", err);
+        console.error("err in starting hazelCache client: ", error);
         initiateCacheReConnectLogic();
         return null;
     }
