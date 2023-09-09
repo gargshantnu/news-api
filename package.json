@@ -1,0 +1,22 @@
+{
+  "name": "news-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gargshantnu/news-api.git"
+  },
+  "author": "gargshantnu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gargshantnu/news-api/issues"
+  },
+  "homepage": "https://github.com/gargshantnu/news-api#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
